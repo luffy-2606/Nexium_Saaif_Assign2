@@ -39,10 +39,21 @@ export default function BlogSummarizer() {
       })
 
       if (!scrapeResponse.ok) {
-        throw new Error('Failed to scrape blog')
+        const errorText = await scrapeResponse.text()
+        console.error('Scrape API error:', errorText)
+        throw new Error(`Failed to scrape blog: ${scrapeResponse.status}`)
       }
 
-      const scrapeData = await scrapeResponse.json()
+      const responseText = await scrapeResponse.text()
+      let scrapeData;
+      
+      try {
+        scrapeData = JSON.parse(responseText)
+      } catch (parseError) {
+        console.error('JSON Parse Error:', parseError)
+        console.error('Response was:', responseText.substring(0, 200))
+        throw new Error('Invalid response from scraping service')
+      }
       
       // Step 2: Generate summary using our simple AI logic
       const summary = generateSummary(scrapeData.content)
@@ -70,7 +81,13 @@ export default function BlogSummarizer() {
         })
       })
 
-      const saveResult = await saveResponse.json()
+      let saveResult;
+      try {
+        saveResult = await saveResponse.json()
+      } catch (parseError) {
+        console.error('Save API JSON Parse Error:', parseError)
+        saveResult = { success: false, error: 'Invalid response from save service' }
+      }
       
       if (saveResult.success) {
         setSaveStatus(`✅ Data saved! Supabase: ${saveResult.supabase_saved ? '✅' : '❌'}, MongoDB: ${saveResult.mongodb_saved ? '✅' : '❌'}`)
