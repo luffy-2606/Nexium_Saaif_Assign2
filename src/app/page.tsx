@@ -90,7 +90,7 @@ export default function BlogSummarizer() {
       }
       
       if (saveResult.success) {
-        setSaveStatus(`✅ Data saved! Supabase: ${saveResult.supabase_saved ? '✅' : '❌'}, MongoDB: ${saveResult.mongodb_saved ? '✅' : '❌'}`)
+        setSaveStatus(`Data saved successfully! Supabase: ${saveResult.supabase_saved ? '✅' : '❌'}, MongoDB: ${saveResult.mongodb_saved ? '✅' : '❌'}`)
       } else {
         setSaveStatus('⚠️ Summary generated but database save failed')
       }
@@ -103,115 +103,151 @@ export default function BlogSummarizer() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">Blog Summarizer</h1>
-          <p className="text-muted-foreground">
-            Enter a blog URL to get an AI summary and Urdu translation
+    <div className="min-h-screen gradient-bg relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-teal-400/20 to-cyan-600/20 rounded-full blur-3xl float-animation"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-emerald-400/20 to-teal-600/20 rounded-full blur-3xl float-animation" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-400/10 to-teal-600/10 rounded-full blur-3xl float-animation" style={{animationDelay: '4s'}}></div>
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header Section */}
+        <div className="text-center mb-16 slide-up">
+          <div className="inline-flex items-center gap-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 px-4 py-2 rounded-full text-sm font-medium mb-6 glass">
+            <span className="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
+            AI-Powered Blog Analysis
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 animated-title">
+            Blog Summarizer
+          </h1>
+          
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Transform any blog post into concise summaries with automatic Urdu translation. 
+            <span className="text-primary font-semibold"> Fast, accurate, and beautiful.</span>
           </p>
         </div>
 
-        <div className="space-y-6">
-          {/* URL Input */}
-          <div className="space-y-2">
-            <Label htmlFor="url">Blog URL</Label>
-            <div className="flex gap-2">
-              <Input
-                id="url"
-                type="url"
-                placeholder="https://example.com/blog-post"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                className="flex-1"
-              />
-              <Button 
-                onClick={handleSummarize} 
-                disabled={isLoading}
-                className="px-8"
-              >
-                {isLoading ? 'Processing...' : 'Summarize'}
-              </Button>
+        {/* Main Content */}
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* URL Input Section */}
+          <div className="glass rounded-2xl p-8 slide-up stagger-1">
+            <div className="space-y-6">
+              <Label htmlFor="url" className="text-lg font-semibold">Enter Blog URL</Label>
+              
+              <div className="flex gap-4">
+                <Input
+                  id="url"
+                  type="url"
+                  placeholder="https://example.com/blog-post"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  className="flex-1 h-12 text-lg border-2 focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                  disabled={isLoading}
+                />
+                <Button 
+                  onClick={handleSummarize} 
+                  disabled={isLoading || !url.trim()}
+                  className="h-12 px-8 bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300"
+                >
+                  {isLoading ? (
+                    <div className="flex items-center gap-2">
+                      <div className="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                      Processing
+                    </div>
+                  ) : (
+                    'Summarize'
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="bg-destructive/10 border border-destructive/20 rounded-md p-4">
-              <p className="text-destructive text-sm">{error}</p>
+            <div className="glass rounded-2xl p-6 border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-900/20 slide-up">
+              <p className="text-red-800 dark:text-red-200 font-medium">{error}</p>
             </div>
           )}
 
           {/* Save Status */}
           {saveStatus && (
-            <div className="bg-green-50 border border-green-200 rounded-md p-4">
-              <p className="text-green-800 text-sm">{saveStatus}</p>
+            <div className="glass rounded-2xl p-6 border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-900/20 slide-up">
+              <p className="text-green-800 dark:text-green-200 font-medium">{saveStatus}</p>
             </div>
           )}
 
-          {/* Results */}
-          {blogData && (
+          {/* Loading State */}
+          {isLoading && (
+            <div className="glass rounded-2xl p-8 slide-up">
+              <div className="flex flex-col items-center gap-6">
+                <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                <div className="text-center">
+                  <p className="text-lg font-semibold mb-2">Processing your blog post...</p>
+                  <p className="text-muted-foreground">Scraping content, generating summary, and translating to Urdu</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Results Section */}
+          {blogData && !isLoading && (
             <div className="space-y-6">
               {/* Blog Title */}
-              <div className="space-y-2">
-                <Label>Blog Title</Label>
-                <div className="bg-muted p-4 rounded-md">
-                  <h2 className="text-xl font-semibold">{blogData.title}</h2>
+              <div className="glass rounded-2xl p-8 slide-up stagger-2">
+                <Label className="text-lg font-semibold mb-6 block">Blog Title</Label>
+                <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 p-6 rounded-xl border-2 border-teal-100 dark:border-teal-800">
+                  <h2 className="text-2xl font-bold text-primary">{blogData.title}</h2>
                 </div>
               </div>
 
-              {/* Original Content Preview */}
-              <div className="space-y-2">
-                <Label>Original Content (Preview)</Label>
-                <Textarea
-                  value={blogData.content.substring(0, 500) + '...'}
-                  readOnly
-                  className="min-h-[100px]"
-                />
-              </div>
+              
 
               {/* English Summary */}
-              <div className="space-y-2">
-                <Label>AI Summary (English)</Label>
-                <Textarea
-                  value={blogData.summary}
-                  readOnly
-                  className="min-h-[120px]"
-                />
+              <div className="glass rounded-2xl p-8 slide-up stagger-4">
+                <Label className="text-lg font-semibold mb-6 block">AI Summary (English)</Label>
+                <div className="bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20 p-6 rounded-xl border-2 border-cyan-100 dark:border-cyan-800">
+                  <p className="text-lg leading-relaxed text-cyan-900 dark:text-cyan-100">{blogData.summary}</p>
+                </div>
               </div>
 
               {/* Urdu Translation */}
-              <div className="space-y-2">
-                <Label>Urdu Translation</Label>
-                <Textarea
-                  value={blogData.urduSummary}
-                  readOnly
-                  className="min-h-[120px] font-mono"
-                  dir="rtl"
-                />
+              <div className="glass rounded-2xl p-8 slide-up stagger-4">
+                <Label className="text-lg font-semibold mb-6 block">Urdu Translation</Label>
+                <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 p-6 rounded-xl border-2 border-emerald-100 dark:border-emerald-800">
+                  <p className="text-lg leading-relaxed text-emerald-900 dark:text-emerald-100 font-mono" dir="rtl">
+                    {blogData.urduSummary}
+                  </p>
+                </div>
               </div>
 
-              {/* New Summarize Button */}
-              <div className="text-center">
+              {/* Action Buttons */}
+              <div className="flex gap-4 justify-center pt-8">
                 <Button 
                   onClick={() => {
                     setBlogData(null)
                     setUrl('')
                     setSaveStatus('')
+                    setError('')
                   }}
                   variant="outline"
+                  className="h-12 px-8 rounded-xl border-2 hover:bg-primary hover:text-primary-foreground transform hover:scale-[1.02] transition-all duration-300"
                 >
                   Summarize Another Blog
                 </Button>
+                
+                
               </div>
             </div>
           )}
         </div>
 
-        {/* Simple Footer */}
-        <footer className="mt-16 text-center text-sm text-muted-foreground">
-          <p>Built with Next.js, ShadCN UI, Supabase & MongoDB</p>
-        </footer>
+        
       </div>
     </div>
   )
