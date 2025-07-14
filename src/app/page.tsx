@@ -90,7 +90,7 @@ export default function BlogSummarizer() {
       }
       
       if (saveResult.success) {
-        setSaveStatus(`Data saved successfully! Supabase: ${saveResult.supabase_saved ? '✅' : '❌'}, MongoDB: ${saveResult.mongodb_saved ? '✅' : '❌'}`)
+        setSaveStatus(`Data saved successfully! Supabase: ${saveResult.supabase_saved ? 'Succesfull' : 'Unsuccesfull'}, MongoDB: ${saveResult.mongodb_saved ? 'Succesfull' : 'Unsuccesfull'}`)
       } else {
         setSaveStatus('⚠️ Summary generated but database save failed')
       }
@@ -114,10 +114,7 @@ export default function BlogSummarizer() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header Section */}
         <div className="text-center mb-16 slide-up">
-          <div className="inline-flex items-center gap-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 px-4 py-2 rounded-full text-sm font-medium mb-6 glass">
-            <span className="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
-            AI-Powered Blog Analysis
-          </div>
+          
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animated-title">
             Blog Summarizer
@@ -125,7 +122,7 @@ export default function BlogSummarizer() {
           
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Transform any blog post into concise summaries with automatic Urdu translation. 
-            <span className="text-primary font-semibold"> Fast, accurate, and beautiful.</span>
+            <span className="text-primary font-semibold"> Fast, Accurate, and Beautiful.</span>
           </p>
         </div>
 
