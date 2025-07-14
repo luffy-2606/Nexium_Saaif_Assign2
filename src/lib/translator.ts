@@ -43,6 +43,44 @@ const englishToUrduDict: { [key: string]: string } = {
   'its': 'اس کا',
   'our': 'ہمارا',
   'their': 'ان کا',
+  'when': 'جب',
+  'where': 'جہاں',
+  'why': 'کیوں',
+  'how': 'کیسے',
+  'what': 'کیا',
+  'who': 'کون',
+  'which': 'کون سا',
+  'on': 'پر',
+  'in': 'میں',
+  'at': 'پر',
+  'by': 'کے ذریعے',
+  'for': 'کے لیے',
+  'to': 'کو',
+  'from': 'سے',
+  'with': 'کے ساتھ',
+  'without': 'کے بغیر',
+  'of': 'کا',
+  'about': 'کے بارے میں',
+  'despite': 'کے باوجود',
+  'against': 'کے خلاف',
+  'between': 'کے درمیان',
+  'among': 'میں سے',
+  'during': 'کے دوران',
+  'after': 'کے بعد',
+  'before': 'سے پہلے',
+  'since': 'سے',
+  'until': 'تک',
+  'while': 'جبکہ',
+  'if': 'اگر',
+  'unless': 'جب تک نہیں',
+  'although': 'اگرچہ',
+  'because': 'کیونکہ',
+  'so': 'لہذا',
+  'but': 'لیکن',
+  'however': 'تاہم',
+  'therefore': 'اس لیے',
+  'moreover': 'مزید برآں',
+  'furthermore': 'علاوہ ازیں',
   
   // Common verbs
   'go': 'جانا',
@@ -297,6 +335,82 @@ const englishToUrduDict: { [key: string]: string } = {
   'global': 'عالمی',
   'regional': 'علاقائی',
   
+  // Legal & Political Terms
+  'court': 'عدالت',
+  'judge': 'جج',
+  'law': 'قانون',
+  'jurisdiction': 'دائرہ اختیار',
+  'authority': 'اختیار',
+  'justice': 'انصاف',
+  'crime': 'جرم',
+  'crimes': 'جرائم',
+  'criminal': 'مجرم',
+  'trial': 'مقدمہ',
+  'case': 'کیس',
+  'evidence': 'ثبوت',
+  'witness': 'گواہ',
+  'verdict': 'فیصلہ',
+  'sentence': 'سزا',
+  'punishment': 'سزا',
+  'fine': 'جرمانہ',
+  'prison': 'جیل',
+  'jail': 'جیل',
+  'police': 'پولیس',
+  'investigation': 'تحقیقات',
+  'arrest': 'گرفتاری',
+  'commit': 'کرنا',
+  'committed': 'کیا گیا',
+  'violate': 'خلاف ورزی',
+  'violation': 'خلاف ورزی',
+  'enforce': 'نافذ کرنا',
+  'enforcement': 'نفاذ',
+  'mechanism': 'طریقہ کار',
+  'treaty': 'معاہدہ',
+  'icc': 'بین الاقوامی فوجداری عدالت',
+  'state': 'ریاست',
+  'states': 'ریاستیں',
+  'united': 'متحدہ',
+  'nation': 'قوم',
+  'nations': 'اقوام',
+  'member': 'رکن',
+  'territory': 'علاقہ',
+  'territorial': 'علاقائی',
+  'israel': 'اسرائیل',
+  'israeli': 'اسرائیلی',
+  'palestine': 'فلسطین',
+  'palestinian': 'فلسطینی',
+  'war': 'جنگ',
+  'conflict': 'تنازعہ',
+  'peace': 'امن',
+  'tension': 'کشیدگی',
+  'tensions': 'کشیدگی',
+  'reject': 'مسترد کرنا',
+  'rejected': 'مسترد کیا',
+  'accept': 'قبول کرنا',
+  'accepted': 'قبول کیا',
+  'approve': 'منظور کرنا',
+  'approved': 'منظور کیا',
+  'deny': 'انکار کرنا',
+  'denied': 'انکار کیا',
+  'followed': 'پیروی کی',
+  'suit': 'مقدمہ',
+  'action': 'کارروائی',
+  'taking': 'لے رہا',
+  'retaliatory': 'انتقامی',
+  'retaliation': 'انتقام',
+  'response': 'جواب',
+  'ally': 'حلیف',
+  'allies': 'حلیف',
+  'enemy': 'دشمن',
+  'enemies': 'دشمن',
+  'weakness': 'کمزوری',
+  'strength': 'طاقت',
+  'power': 'طاقت',
+  'powerful': 'طاقتور',
+  'strongly': 'سختی سے',
+  'lack': 'کمی',
+  'absence': 'غیر موجودگی',
+  
   // Technology & Internet
   'software': 'سافٹ ویئر',
   'hardware': 'ہارڈ ویئر',
@@ -421,11 +535,8 @@ const englishToUrduDict: { [key: string]: string } = {
   'licensed': 'لائسنس یافتہ',
   'registered': 'رجسٹرڈ',
   'authorized': 'مجاز',
-  'approved': 'منظور شدہ',
   'verified': 'تصدیق شدہ',
   'confirmed': 'تصدیق شدہ',
-  'accepted': 'قبول شدہ',
-  'rejected': 'مسترد',
   'pending': 'زیر التواء',
   'reviewing': 'جائزہ',
   'evaluating': 'تشخیص',
@@ -522,8 +633,6 @@ const englishToUrduDict: { [key: string]: string } = {
   'nurse': 'نرس',
   'patient': 'مریض',
   'lawyer': 'وکیل',
-  'judge': 'جج',
-  'police': 'پولیس',
   'officer': 'افسر',
   'soldier': 'سپاہی',
   'general': 'جنرل',
@@ -533,7 +642,6 @@ const englishToUrduDict: { [key: string]: string } = {
   'follower': 'پیروکار',
   'supporter': 'حامی',
   'opponent': 'مخالف',
-  'enemy': 'دشمن',
   'colleague': 'ساتھی',
   'neighbor': 'پڑوسی',
   'relative': 'رشتہ دار',
@@ -680,8 +788,6 @@ const englishToUrduDict: { [key: string]: string } = {
   'below': 'نیچے',
   'over': 'اوپر',
   'under': 'نیچے',
-  'between': 'درمیان',
-  'among': 'میں سے',
   'around': 'چاروں طرف',
   'through': 'کے ذریعے',
   'across': 'پار',
@@ -693,7 +799,6 @@ const englishToUrduDict: { [key: string]: string } = {
   'distant': 'دور',
   'here': 'یہاں',
   'there': 'وہاں',
-  'where': 'کہاں',
   'everywhere': 'ہر جگہ',
   'nowhere': 'کہیں نہیں',
   'somewhere': 'کہیں',
@@ -757,22 +862,13 @@ const englishToUrduDict: { [key: string]: string } = {
 };
 
 export function translateToUrdu(text: string): string {
-  // Split text into words and translate each word
+  // Simple word-by-word translation
   const words = text.toLowerCase().match(/\b\w+\b/g) || [];
   const translatedWords = words.map(word => {
     return englishToUrduDict[word] || word;
   });
   
-  // Join translated words back together
-  let translatedText = translatedWords.join(' ');
-  
-  // Keep original punctuation structure roughly
-  const punctuation = text.match(/[.,!?;:()]/g) || [];
-  punctuation.forEach((punct, index) => {
-    if (index < translatedWords.length) {
-      translatedText += punct;
-    }
-  });
-  
-  return translatedText;
-} 
+  return translatedWords.join(' ');
+}
+
+ 

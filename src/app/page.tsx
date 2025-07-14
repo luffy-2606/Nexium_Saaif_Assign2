@@ -122,7 +122,7 @@ export default function BlogSummarizer() {
           
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Transform any blog post into concise summaries with automatic Urdu translation. 
-            <span className="text-primary font-semibold"> Fast, Accurate, and Beautiful.</span>
+            <span className="text-primary font-semibold"> Made by Saaif </span>
           </p>
         </div>
 
