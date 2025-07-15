@@ -1,10 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+
+{/*ShadCN UI*/}
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+
+{/*actual logic*/}
 import { generateSummary } from '@/lib/summarizer'
 import { translateToUrdu } from '@/lib/translator'
 
@@ -21,15 +24,18 @@ export default function BlogSummarizer() {
   const [saveStatus, setSaveStatus] = useState('')
 
   const handleSummarize = async () => {
+    // if URL does not exist
     if (!url) {
       setError('Please enter a blog URL')
-      return
+      return  //end 
     }
 
-    setIsLoading(true)
-    setError('')
-    setSaveStatus('')
+    // if URL exists, continue
+    setIsLoading(true) // loading screen
+    setError('')       // no errors
+    setSaveStatus('')  // 
 
+    // start scarping and summarizing blog (real code starts)
     try {
       // Step 1: Scrape the blog
       const scrapeResponse = await fetch('/api/scrape', {
@@ -44,9 +50,11 @@ export default function BlogSummarizer() {
         throw new Error(`Failed to scrape blog: ${scrapeResponse.status}`)
       }
 
+      // store the data fetched in plain text
       const responseText = await scrapeResponse.text()
       let scrapeData;
       
+      // parse the fetched data into json format
       try {
         scrapeData = JSON.parse(responseText)
       } catch (parseError) {
@@ -113,9 +121,7 @@ export default function BlogSummarizer() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header Section */}
-        <div className="text-center mb-16 slide-up">
-          
-          
+        <div className="text-center mb-16 slide-up">          
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animated-title">
             Blog Summarizer
           </h1>
@@ -215,7 +221,7 @@ export default function BlogSummarizer() {
 
               {/* Urdu Translation */}
               <div className="glass rounded-2xl p-8 slide-up stagger-4">
-                <Label className="text-lg font-semibold mb-6 block">Urdu Translation</Label>
+                <Label className="text-lg font-semibold mb-6 block">Urdu Translation (Beta)</Label>
                 <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 p-6 rounded-xl border-2 border-emerald-100 dark:border-emerald-800">
                   <p className="text-lg leading-relaxed text-emerald-900 dark:text-emerald-100 font-mono" dir="rtl">
                     {blogData.urduSummary}

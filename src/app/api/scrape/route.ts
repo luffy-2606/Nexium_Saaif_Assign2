@@ -5,13 +5,14 @@ export async function POST(request: NextRequest) {
   try {
     const { url } = await request.json();
     
+    // check if URL exists
     if (!url) {
       return NextResponse.json({ error: 'URL is required' }, { status: 400 });
     }
 
     // Validate URL format
     try {
-      new URL(url);
+      new URL(url);  // built in function to check validity of url
     } catch (urlError) {
       return NextResponse.json({ error: 'Invalid URL format' }, { status: 400 });
     }
@@ -19,6 +20,7 @@ export async function POST(request: NextRequest) {
     // Fetch the webpage with proper headers
     const response = await fetch(url, {
       headers: {
+        //mimicking an actual user
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
@@ -33,6 +35,7 @@ export async function POST(request: NextRequest) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
+    //stores the html of the webpage
     const html = await response.text();
     
     // Parse HTML with cheerio
@@ -72,16 +75,16 @@ export async function POST(request: NextRequest) {
       content = $('body').text().trim();
     }
     
-    // Clean up the content
+    // Clean up the content -> removes all white spaces (space/tab/new-line)
     content = content.replace(/\s+/g, ' ').trim();
     
     // Get title
     let title = $('title').text() || $('h1').first().text() || 'Untitled';
     
     return NextResponse.json({
-      title: title.trim(),
+      title: title.trim(),  // full title with extra white space removed
       content: content.substring(0, 5000), // Limit content length
-      fullText: content
+      fullText: content  // sending raw data just in case
     });
     
   } catch (error) {

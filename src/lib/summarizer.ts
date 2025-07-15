@@ -1,10 +1,12 @@
 // Simple AI Summary Simulation
 export function generateSummary(text: string): string {
+
+  // check if text exists or is too short
   if (!text || text.length < 100) {
     return "Text too short to summarize.";
   }
 
-  // Split text into sentences
+  // Split text into sentences (by . ! ? )
   const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 20);
   
   if (sentences.length < 3) {
@@ -18,7 +20,7 @@ export function generateSummary(text: string): string {
     'first', 'second', 'third', 'finally', 'conclusion', 'result', 'therefore',
     'because', 'however', 'although', 'despite', 'furthermore', 'moreover'
   ];
-
+  
   const scoredSentences = sentences.map(sentence => {
     let score = 0;
     const words = sentence.toLowerCase().split(/\s+/);

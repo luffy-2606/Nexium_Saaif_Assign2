@@ -999,5 +999,3 @@ export function translateToUrdu(text: string): string {
   
   return translatedWords.join(' ');
 }
-
- 
